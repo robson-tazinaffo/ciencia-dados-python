@@ -1,4 +1,4 @@
-# Database-Experience Dio
+# Bootcamp Geração Tech Unimed-BH - Ciência de Dados
 
 - **Construindo um Esquema Conceitual do Zero**.
 
