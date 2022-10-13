@@ -32,14 +32,23 @@ O bootcamp Unimed-BH Ciência de Dados é para profissionais que já atuam com c
 <img align="center" alt="MySQL" height="70" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg" />
 <img align="center" alt="AWS" height="120" width="70" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" />
 
+​    
+
+
 
 ## Modulos que serão apresentados:
 
 - **1 - Prepare-se para a jornada(Onboarding)**
+
 - **2 - Python para Cientistas de Dados**.
+
 - **3 - Banco de Dados SQL e NoSQL**
+
 - **4 - Imersão Cloud Computer**
+
 - **5 - Machine Learning**
+
+  
 
 
 
