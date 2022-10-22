@@ -17,6 +17,16 @@ Repositório para o live coding do dia 30/09/2021 sobre o Amazon DynamoDB
 - Configurando a conexão com o DynamoDB da AWS via Amazon CLI
 
    [AWS Command Line Interface configure](https://docs.aws.amazon.com/pt_br/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-region)
+   
+   ```
+   $ aws configure
+   AWS Access Key ID [****************TJTD]: AMNASDMBMNASDMBSDBAS
+   AWS Secret Access Key [****************0unL]: algmglsmdasdkl/7klkasklsjdlakjadlsjnL
+   Default region name [us-east-1]: us-east-1
+   Default output format [json]: json
+   ```
+   
+   
 
 
 - Criar uma tabela

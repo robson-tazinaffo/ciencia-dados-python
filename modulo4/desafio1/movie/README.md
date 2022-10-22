@@ -16,16 +16,17 @@ Repositório para o live coding do dia 30/09/2021 sobre o Amazon DynamoDB
 
 - Configurando a conexão com o DynamoDB da AWS via Amazon CLI
 
+   [AWS Command Line Interface configure](https://docs.aws.amazon.com/pt_br/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-region)
+   
    ```
    $ aws configure
-   AWS Access Key ID [****************0102]: ABCDEFGHIJKLMNOPQRS
-   AWS Secret Access Key [****************DgI$]: KKKKKKKKKKKK/89uuWSHKBKBSBJBHSBJBJoooL
-   Default region name [None]: us-east-1
-   Default output format [None]: json
-   
+   AWS Access Key ID [****************TJTD]: AMNASDMBMNASDMBSDBAS
+   AWS Secret Access Key [****************0unL]: algmglsmdasdkl/7klkasklsjdlakjadlsjnL
+   Default region name [us-east-1]: us-east-1
+   Default output format [json]: json
    ```
    
-   [AWS Command Line Interface configure](https://docs.aws.amazon.com/pt_br/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-region)
+   
 
 
 - Criar uma tabela
@@ -48,41 +49,41 @@ aws dynamodb create-table \
 ```
 aws dynamodb put-item \
     --table-name Movie \
-    --item file://itemmovie.json \
+    --item file://itemMovie.json \
 ```
 
 - Inserir múltiplos itens
 
 ```
 aws dynamodb batch-write-item \
-    --request-items file://batchmovie.json
+    --request-items file://batchMovie.json
 ```
 
-- Criar um index global secundário baseado no produtor do filme
+- Criar um index global secundário baseado no título do filme
 
 ```
 aws dynamodb update-table \
     --table-name Movie \
-    --attribute-definitions AttributeName=Development,AttributeType=S \
+    --attribute-definitions AttributeName=MovieTitle,AttributeType=S \
     --global-secondary-index-updates \
-        "[{\"Create\":{\"IndexName\": \"Development-index\",\"KeySchema\":[{\"AttributeName\":\"Development\",\"KeyType\":\"HASH\"}], \
+        "[{\"Create\":{\"IndexName\": \"MovieTitle-index\",\"KeySchema\":[{\"AttributeName\":\"MovieTitle\",\"KeyType\":\"HASH\"}], \
         \"ProvisionedThroughput\": {\"ReadCapacityUnits\": 10, \"WriteCapacityUnits\": 5      },\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"
 ```
 
-- Criar um index global secundário baseado no nome do produtor e no título do filme
+- Criar um index global secundário baseado no nome do Diretor e no título do filme
 
 ```
 aws dynamodb update-table \
     --table-name Movie \
     --attribute-definitions\
         AttributeName=Directed,AttributeType=S \
-        AttributeName=Development,AttributeType=S \
+        AttributeName=MovieTitle,AttributeType=S \
     --global-secondary-index-updates \
-        "[{\"Create\":{\"IndexName\": \"DevelopmentMovieTitle-index\",\"KeySchema\":[{\"AttributeName\":\"Directed\",\"KeyType\":\"HASH\"}, {\"AttributeName\":\"MovieTitle\",\"KeyType\":\"RANGE\"}], \
+        "[{\"Create\":{\"IndexName\": \"DirectedMovieTitle-index\",\"KeySchema\":[{\"AttributeName\":\"Directed\",\"KeyType\":\"HASH\"}, {\"AttributeName\":\"MovieTitle\",\"KeyType\":\"RANGE\"}], \
         \"ProvisionedThroughput\": {\"ReadCapacityUnits\": 10, \"WriteCapacityUnits\": 5      },\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"
 ```
 
-- Criar um index global secundário baseado no título da música e no ano
+- Criar um index global secundário baseado no título do filme e no ano
 
 ```
 aws dynamodb update-table \
@@ -100,15 +101,15 @@ aws dynamodb update-table \
 ```
 aws dynamodb query \
     --table-name Movie \
-    --key-condition-expression "Director = :director" \
-    --expression-attribute-values  '{":director":{"S":"Joseph Kosinski"}}'
+    --key-condition-expression "Directed = :Directed" \
+    --expression-attribute-values  '{":Directed":{"S":"Joseph Kosinski"}}'
 ```
 - Pesquisar item por diretor título do filme
 
 ```
 aws dynamodb query \
     --table-name Movie \
-    --key-condition-expression "Director = :director and MovieTitle = :title" \
+    --key-condition-expression "Directed = :directed and MovieTitle = :title" \
     --expression-attribute-values file://keyconditions.json
 ```
 
@@ -119,17 +120,17 @@ aws dynamodb query \
     --table-name Movie \
     --index-name MovieTitle-index \
     --key-condition-expression "MovieTitle = :name" \
-    --expression-attribute-values  '{":name":{"S":"Iron Man 3"}}'
+    --expression-attribute-values  '{":name":{"S":"Top Gun Maverick"}}'
 ```
 
-- Pesquisa pelo index secundário baseado no nome do produtor no título do filme
+- Pesquisa pelo index secundário baseado no nome do Diretor e no título do filme
 
 ```
 aws dynamodb query \
     --table-name Movie \
     --index-name DirectedMovieTitle-index \
-    --key-condition-expression "Directed = :v_development and MovieTitle = :v_title" \
-    --expression-attribute-values  '{":v_development":{"S":"Marvel Studios"},":v_title":{"S":"Iron Man 3"} }'
+    --key-condition-expression "Directed = :v_Directed and MovieTitle = :v_title" \
+    --expression-attribute-values  '{":v_Directed":{"S":"Joseph Kosinski"},":v_title":{"S":"Top Gun Maverick"} }'
 ```
 
 - Pesquisa pelo index secundário baseado no título do filme e no ano
@@ -139,5 +140,5 @@ aws dynamodb query \
     --table-name Movie \
     --index-name MovieTitleYear-index \
     --key-condition-expression "MovieTitle = :v_movie and MovieYear = :v_year" \
-    --expression-attribute-values  '{":v_movie":{"S":"Captain America: Civil War"},":v_year":{"S":"2016"} }'
+    --expression-attribute-values  '{":v_movie":{"S":"Top Gun Maverick"},":v_year":{"S":"2022"} }'
 ```
