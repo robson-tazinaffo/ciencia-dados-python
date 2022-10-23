@@ -1,0 +1,3 @@
+select city, population
+from "populationdb"."population"
+WHERE city IN ('Aramina', 'Batatais', 'Buritizal', 'Cristais Paulista', 'Franca', 'Guará', 'Igarapava', 'Ipuã', 'Itirapuã', 'Ituverava', 'Jeriquara', 'Miguelópolis', 'Morro Agudo', 'Nuporanga', 'Orlândia', 'Patrocínio Paulista', 'Pedregulho', 'Restinga', 'Ribeirão Corrente', 'Rifaina', 'Sales Oliveira', 'São Joaquim da Barra', 'São José da Bela Vista');
