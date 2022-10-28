@@ -7,13 +7,13 @@
 </div>
 
 
-## Jogo da velha
+## Repositório Jogo da velha
 
 
 
 ```
 Objetivo: 
 
-Neste projeto aprenderemos a criar um pacote de exemplo de um jogo da velha em Python e disponibilizá-lo no repositório Pypi.
+Neste projeto aprenderemos a criar um pacote de exemplo de um jogo da velha em Python e disponibilizá-lo no repositório pypi.
 ```
 
