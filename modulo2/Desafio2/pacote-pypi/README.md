@@ -12,7 +12,7 @@
 
 [Registrar no Pypi](https://pypi.org/account/register/)
 
-[Registrar no Test Pypi]([https://test.pypi.org/account/register]))
+[Registrar no Test Pypi](https://test.pypi.org/account/register)
 
 
 
