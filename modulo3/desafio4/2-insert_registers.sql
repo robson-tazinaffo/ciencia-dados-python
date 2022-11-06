@@ -89,7 +89,6 @@ INSERT INTO `oficina`.`veiculo` (idModelo, cor, placa) VALUES (4, 3, 'JKT0009');
 INSERT INTO `oficina`.`servico` (idVeiculo, idTabela_Servico, idEquipe, idStatus_servico, descricao, valor_pecas, valor_maoobra, data_inicio, data_termino) VALUES (1, 1, 1, 1, 'Troca de velas', 75.90, 35.00, '2022-10-31', '2022-11-02' );
 
 
-
 -- -----------------------------------------------------
 -- TABLE `oficina`.`produto`
 -- -----------------------------------------------------

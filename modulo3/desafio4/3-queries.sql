@@ -2,6 +2,7 @@
 SELECT * FROM oficina.cliente;
 SELECT * FROM oficina.funcionario;
 SELECT * FROM oficina.produto;
+SELECT * FROM oficina.fornecedor;
 
 
 -- Filtros com WHERE Statement
@@ -9,6 +10,7 @@ SELECT * from oficina.servico where idVeiculo=4;
 SELECT * FROM oficina.cliente where idCliente = 1
 SELECT * FROM oficina.marca where id = 1
 SELECT * FROM oficina.modelo where id = 2
+SELECT * FROM oficina.fornecedor where id = 2
 
 -- Crie expressões para gerar atributos derivados
 SELECT (ma.identificacao) + '' '' + (md.identificacao) as Marca_Modelo from oficina.marca ma, oficina.modelo as md;
@@ -29,15 +31,19 @@ SELECT v.placa , ma.Identificacao as marca, mo.identificacao as modelo
 	inner join oficina.marca ma on ma.id = mo.idMarca
 	
 
--- PERGUNTAS
--- 1) Quantas ordens de serviço foram feitas para cada cliente?
+-- -----------------------------------------------------
+-- Quantas ordens de serviço foram feitas para cada cliente?
+-- -----------------------------------------------------
+
 select Count(os.idCliente) as quantidade , c.Nome
     from oficina.ordem_servico os
     inner join oficina.Cliente c on os.idCliente = c.id
     group by os.idCliente, c.Nome
 
 
--- 2) Marca de veiculo mais atendido
+-- -----------------------------------------------------
+-- Marca de veiculo mais atendido
+-- -----------------------------------------------------
 select count(os.idVeiculo) as quantidade , ma.identificacao
     from oficina.ordem_servico os
     inner join oficina.veiculo v on os.idVeiculo = v.id
@@ -46,14 +52,17 @@ select count(os.idVeiculo) as quantidade , ma.identificacao
 	group by os.idVeiculo, ma.identificacao
 	
 	
-
--- 3) Relação de produtos fornecedores e estoques;
+-- -----------------------------------------------------
+-- Relação de produtos, seu fornecedor e estoques disponivel;
+-- -----------------------------------------------------
 select f.RazaoSocial, p.Identificacao, pe.Quantidade
     from oficina.Produto p
     inner join oficina.Fornecedor f on f.id = p.idFornecedor
     inner join oficina.produto_estoque pe on p.id = pe.idProduto
 
--- 4) Relação de nomes dos produtos e seu fornecedor
+-- -----------------------------------------------------
+-- Relação de nomes dos produtos e seu fornecedor
+-- -----------------------------------------------------
 select f.razao_social as Fornecedor, p.Identificacao as produto
     from oficina.Produto p
     inner join oficina.Fornecedor f on f.id = p.idFornecedor
